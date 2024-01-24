@@ -140,20 +140,20 @@ Esse histograma sugere várias questões interessantes:
 
 -   Por que há mais diamantes ligeiramente à direita de cada pico do que há ligeiramente à esquerda de cada pico?
 
-Visualizations can also reveal clusters, which suggest that subgroups exist in your data.
-To understand the subgroups, ask:
+Visualizações também podem revelar agrupamentos, os quais sugerem que existem subgrupos em seus dados.
+Para entender os subgrupos, questione:
 
--   How are the observations within each subgroup similar to each other?
+-   Como são as observações dentro de cada subgrupo similares uns aos outros?
 
--   How are the observations in separate clusters different from each other?
+-   Como são as observações em grupos diferentes separados uns dos outros?
 
--   How can you explain or describe the clusters?
+-   Como você pode explicar ou descrever os grupos?
 
--   Why might the appearance of clusters be misleading?
+-   Por que a aparência de agrupamentos pode ser enganadora?
 
-Some of these questions can be answered with the data while some will require domain expertise about the data.
-Many of them will prompt you to explore a relationship *between* variables, for example, to see if the values of one variable can explain the behavior of another variable.
-We'll get to that shortly.
+Algumas dessas questões podem ser respondidas com os dados, enquanto outras irão requerer experiência de domínio sobre os dados.
+Muitas delas irão levar você a explorar a relação entre variáveis, por exemplo, para ver se os valores de uma variável podem explicar o comportamento de outra variável.
+Chegaremos a isso em breve.
 
 ### Unusual values
 
