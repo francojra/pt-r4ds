@@ -227,13 +227,13 @@ Você precisará descobrir o que os causou (por exemplo, um erro de entrada de d
 
 ### Exercícios
 
-1.  Explore the distribution of each of the `x`, `y`, and `z` variables in `diamonds`.
-    What do you learn?
-    Think about a diamond and how you might decide which dimension is the length, width, and depth.
+1.  Explore a distribuição das variáveis `x`, `y`, and `z` em `dados`.
+    O que você aprendeu?
+    Pense em um diamante e como você pode decidir qual dimensão é o comprimento, largura e profundidade.
 
-2.  Explore the distribution of `price`.
-    Do you discover anything unusual or surprising?
-    (Hint: Carefully think about the `binwidth` and make sure you try a wide range of values.)
+2.  Explore a distribuição de `preço`.
+    Você percebe algo incomum ou surpreendente?
+    (Dica: pense cuidadosamente sobre o `binwidth` e tenha certeza que você tentou uma ampla gama de valores.)
 
 3.  How many diamonds are 0.99 carat?
     How many are 1 carat?
