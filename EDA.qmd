@@ -155,13 +155,14 @@ Algumas dessas questões podem ser respondidas com os dados, enquanto outras ir�
 Muitas delas irão levar você a explorar a relação entre variáveis, por exemplo, para ver se os valores de uma variável podem explicar o comportamento de outra variável.
 Chegaremos a isso em breve.
 
-### Unusual values
+### Valores atípicos
 
-Outliers are observations that are unusual; data points that don't seem to fit the pattern.
-Sometimes outliers are data entry errors, sometimes they are simply values at the extremes that happened to be observed in this data collection, and other times they suggest important new discoveries.
-When you have a lot of data, outliers are sometimes difficult to see in a histogram.
-For example, take the distribution of the `y` variable from the diamonds dataset.
-The only evidence of outliers is the unusually wide limits on the x-axis.
+Outliers são observações atípicas, pontos de dados que não estão ajustados ao padrão.
+Algumas vezes outliers são erros de entrada de dados.
+Algumas vezes são apenas valores extremos que passaram a ser observados nesta coleta de dados, e outras vezes, eles sugerem importantes novas descobertas.
+Quando você tem muitos dados, outliers são algumas vezes difíceis de serem vistos em histogramas.
+Por exemplo, pegue a distribuição da variável `y` do conjunto de dados de diamante.
+A única evidência de valores discrepantes são os limites incomumente amplos no eixo x.
 
 ```{r}
 #| fig-alt: |
@@ -169,12 +170,11 @@ The only evidence of outliers is the unusually wide limits on the x-axis.
 #|   the y-axis ranges from 0 to 12000. There is a peak around 5, and the 
 #|   data appear to be completely clustered around the peak.
 
-ggplot(diamonds, aes(x = y)) + 
+ggplot(diamante, aes(x = y)) + 
   geom_histogram(binwidth = 0.5)
 ```
 
-There are so many observations in the common bins that the rare bins are very short, making it very difficult to see them (although maybe if you stare intently at 0 you'll spot something).
-To make it easy to see the unusual values, we need to zoom to small values of the y-axis with `coord_cartesian()`:
+Há muitas observações nas caixas comuns que as caixas raras são muito curtas, tornando muito difícil vê-las (embora talvez se você olhar atentamente para 0 você encontre algo).Para facilitar a visualização dos valores incomuns, precisamos ampliar para os valores pequenos do eixo y com `coord_cartesian()`:
 
 ```{r}
 #| fig-alt: |
@@ -184,16 +184,16 @@ To make it easy to see the unusual values, we need to zoom to small values of th
 #|   there is one bin at 0 with a height of about 8, one a little over 30 with 
 #|   a height of 1 and another one a little below 60 with a height of 1.
 
-ggplot(diamonds, aes(x = y)) + 
+ggplot(diamante, aes(x = y)) + 
   geom_histogram(binwidth = 0.5) +
   coord_cartesian(ylim = c(0, 50))
 ```
 
-`coord_cartesian()` also has an `xlim()` argument for when you need to zoom into the x-axis.
-ggplot2 also has `xlim()` and `ylim()` functions that work slightly differently: they throw away the data outside the limits.
+`coord_cartesian()` também possui um argumento `xlim()` para quando você precisar ampliar o eixo x.
+ggplot2 também possui as funções `xlim()` e `ylim()` que funcionam de maneira um pouco diferente: elas jogam fora os dados fora dos limites.
 
-This allows us to see that there are three unusual values: 0, \~30, and \~60.
-We pluck them out with dplyr:
+Isso nos permite ver que existem três valores incomuns: 0, \~30 e \~60.
+Nós retiramos eles com dplyr:
 
 ```{r}
 #| include: false
@@ -202,11 +202,11 @@ old <- options(tibble.print_max = 10, tibble.print_min = 10)
 ```
 
 ```{r}
-unusual <- diamonds |> 
+incomum <- diamante |> 
   filter(y < 3 | y > 20) |> 
-  select(price, x, y, z) |>
+  select(preco, x, y, z) |>
   arrange(y)
-unusual
+incomum
 ```
 
 ```{r}
@@ -215,18 +215,17 @@ unusual
 options(old)
 ```
 
-The `y` variable measures one of the three dimensions of these diamonds, in mm.
-We know that diamonds can't have a width of 0mm, so these values must be incorrect.
-By doing EDA, we have discovered missing data that was coded as 0, which we never would have found by simply searching for `NA`s.
-Going forward we might choose to re-code these values as `NA`s in order to prevent misleading calculations.
-We might also suspect that measurements of 32mm and 59mm are implausible: those diamonds are over an inch long, but don't cost hundreds of thousands of dollars!
+A variável `y` mede uma das três dimensões desses diamantes, em mm.
+Sabemos que os diamantes não podem ter largura de 0 mm, então esses valores devem estar incorretos.
+Ao fazer EDA, descobrimos dados faltantes codificados como 0, que nunca teríamos encontrado simplesmente procurando por `NA`s.do a diantes, nós podemos escolher recodificar estes valores como `NA`s, a fim de evitar cálculos enganosos.
+Também podemos suspeitar que as medidas de 32 mm e 59 mm são implausíveis: esses diamantes têm mais de uma polegada de comprimento, mas não custam centenas de milhares de dólares!
 
-It's good practice to repeat your analysis with and without the outliers.
-If they have minimal effect on the results, and you can't figure out why they're there, it's reasonable to omit them, and move on.
-However, if they have a substantial effect on your results, you shouldn't drop them without justification.
-You'll need to figure out what caused them (e.g., a data entry error) and disclose that you removed them in your write-up.
+É uma boa prática repetir suas análises com e sem valores discrepantes.
+Se eles tiverem um efeito mínimo nos resultados e você não conseguir descobrir por que estão ali, é razoável omiti-los e seguir em frente.
+No entanto, se eles tiverem um efeito substancial nos seus resultados, você não deve abandoná-los sem justificativa.
+Você precisará descobrir o que os causou (por exemplo, um erro de entrada de dados) e divulgar que os removeu em seu artigo.
 
-### Exercises
+### Exercícios
 
 1.  Explore the distribution of each of the `x`, `y`, and `z` variables in `diamonds`.
     What do you learn?
