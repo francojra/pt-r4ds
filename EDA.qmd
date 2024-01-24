@@ -78,8 +78,8 @@ Variáveis também muda se você mede diferentes objetos (por exemplo, cor dos o
 Cada variável tem seu próprio padrão de variação, que pode revelar interessantes informações sobre como isso varia entre medições na mesma observação, bem como entre observações.
 A melhor forma de entender o padrão é visualizando a distribuição dos valores da variável, que você tem aprendido sobre no @sec-data-visualization.
 
-We'll start our exploration by visualizing the distribution of weights (`carat`) of \~54,000 diamonds from the `diamonds` dataset.
-Since `carat` is a numerical variable, we can use a histogram:
+Vamos iniciar nossa exploração visualizando a variação nos pesos (`quilate`) de \~54,000 diamantes do banco de dados `dados`.
+Como `quilate` é uma variável numérica, podemos usar um histograma:
 
 ```{r}
 #| fig-alt: |
@@ -90,32 +90,34 @@ Since `carat` is a numerical variable, we can use a histogram:
 #|   at 1, and much fewer, approximately 5000 diamonds in the bin centered at 
 #|   1.5. Beyond this, there's a trailing tail.
 
-ggplot(diamonds, aes(x = carat)) +
+library(dados)
+
+ggplot(diamante, aes(x = quilate)) +
   geom_histogram(binwidth = 0.5)
 ```
 
-Now that you can visualize variation, what should you look for in your plots?
-And what type of follow-up questions should you ask?
-We've put together a list below of the most useful types of information that you will find in your graphs, along with some follow-up questions for each type of information.
-The key to asking good follow-up questions will be to rely on your curiosity (What do you want to learn more about?) as well as your skepticism (How could this be misleading?).
+Agora que você pode visualizar a variação, o que você deve observar em seus gráficos?
+E que tipo de perguntas de acompanhamento você deve fazer?
+Nós temos colocado abaixo uma lista dos tipos mais comuns de informações que você encontrará em seus gráficos, junto com algumas perguntas de acompanhamento para cada tipo de informação.
+A chave para fazer boas questões de acompanhamento irá depender da curiosidade (o que mais você quer aprender?) bem como do seu ceticismo (Como isso pode ser enganoso?).
 
-### Typical values
+### Valores típicos
 
-In both bar charts and histograms, tall bars show the common values of a variable, and shorter bars show less-common values.
-Places that do not have bars reveal values that were not seen in your data.
-To turn this information into useful questions, look for anything unexpected:
+Em ambos gráficos de barras e histogramas, barras altas mostram valores comuns de uma variável, e barras mais curtas mostram valores menos comuns.
+Locais que não tem barras revelam valores que não foram vistos nos seus dados.
+Para transformar essas informações em perguntas úteis, observe qualquer coisa não esperada:
 
--   Which values are the most common?
-    Why?
+-   Quais valores são os mais comuns?
+    Por quê?
 
--   Which values are rare?
-    Why?
-    Does that match your expectations?
+-   Quais valores são raros?
+    Por quê?
+    Isso corresponde às suas expectativas?
 
--   Can you see any unusual patterns?
-    What might explain them?
+-   Você consegue ver padrões incomuns?
+    O que pode explicar eles?
 
-Let's take a look at the distribution of `carat` for smaller diamonds.
+Vamos observar a distribuição de `quilate` para os diamantes menores.
 
 ```{r}
 #| fig-alt: |
@@ -125,18 +127,18 @@ Let's take a look at the distribution of `carat` for smaller diamonds.
 #|   is right skewed, with many peaks followed by bars in decreasing heights, 
 #|   until a sharp increase at the next peak.
 
-smaller <- diamonds |> 
-  filter(carat < 3)
+menores_diamantes <- diamante |> 
+  filter(quilate < 3)
 
-ggplot(smaller, aes(x = carat)) +
+ggplot(menores_diamantes, aes(x = quilate)) +
   geom_histogram(binwidth = 0.01)
 ```
 
-This histogram suggests several interesting questions:
+Esse histograma sugere várias questões interessantes:
 
--   Why are there more diamonds at whole carats and common fractions of carats?
+-   Por que há mais diamantes em números inteiros de quilates e frações comuns de quilates?
 
--   Why are there more diamonds slightly to the right of each peak than there are slightly to the left of each peak?
+-   Por que há mais diamantes ligeiramente à direita de cada pico do que há ligeiramente à esquerda de cada pico?
 
 Visualizations can also reveal clusters, which suggest that subgroups exist in your data.
 To understand the subgroups, ask:
