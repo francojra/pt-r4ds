@@ -47,23 +47,23 @@ library(tidyverse)
 
 > "É muito melhor uma resposta aproximada à pergunta certa, que muitas vezes é vaga, do que uma resposta exata à pergunta errada, que sempre pode ser precisa." --- John Tukey
 
-Your goal during EDA is to develop an understanding of your data.
-The easiest way to do this is to use questions as tools to guide your investigation.
-When you ask a question, the question focuses your attention on a specific part of your dataset and helps you decide which graphs, models, or transformations to make.
+Seu objetivo durante a EDA é desenvolver uma compreensão dos seus dados.
+A maneira mais fácil de fazer isso é usar perguntas como ferramentas para orientar sua investigação.
+Quando você faz uma pergunta, ela concentra sua atenção em uma parte específica do seu conjunto de dados e ajuda você a decidir quais gráficos, modelos ou transformações fazer.
 
-EDA is fundamentally a creative process.
-And like most creative processes, the key to asking *quality* questions is to generate a large *quantity* of questions.
-It is difficult to ask revealing questions at the start of your analysis because you do not know what insights can be gleaned from your dataset.
-On the other hand, each new question that you ask will expose you to a new aspect of your data and increase your chance of making a discovery.
-You can quickly drill down into the most interesting parts of your data---and develop a set of thought-provoking questions---if you follow up each question with a new question based on what you find.
+EDA é fundamentalmente um processo criativo.
+E como a maioria dos processos criativos, a chave para fazer perguntas de *qualidade* é gerar uma grande *quantidade* de perguntas.
+É difícil fazer perguntas reveladoras no início da sua análise porque você não sabe quais insights podem ser obtidos do seu conjunto de dados.
+Por outro lado, cada nova questão que você fizer irá expor você a um novo aspecto dos seus dados e aumentar sua chance de fazer uma descoberta.
+Você pode detalhar rapidamente as partes mais interessantes dos seus dados---e desenvolver um conjunto de perguntas instigantes---se você acompanhar cada pergunta com uma nova pergunta com base no que encontrar.
 
-There is no rule about which questions you should ask to guide your research.
-However, two types of questions will always be useful for making discoveries within your data.
-You can loosely word these questions as:
+Não há regra sobre quais perguntas você deve fazer para orientar sua pesquisa.
+No entanto, dois tipos de perguntas sempre serão úteis para fazer descobertas em seus dados.
+Você pode formular essas perguntas livremente como:
 
-1.  What type of variation occurs within my variables?
+1.  Que tipo de variação ocorre dentro das minhas variáveis?
 
-2.  What type of covariation occurs between my variables?
+2.  Que tipo de covariação ocorre entre as minhas variáveis?
 
 The rest of this chapter will look at these two questions.
 We'll explain what variation and covariation are, and we'll show you several ways to answer each question.
