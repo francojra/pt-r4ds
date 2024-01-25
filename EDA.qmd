@@ -444,30 +444,30 @@ ggplot(milhas, aes(x = rodovia, y = fct_reorder(classe, rodovia, median))) +
   geom_boxplot()
 ```
 
-#### Exercises
+#### Exercícios
 
-1.  Use what you've learned to improve the visualization of the departure times of cancelled vs. non-cancelled flights.
+1.  Use o que você tem aprendido para melhorar a visualização dos horários de partida de voos cancelados e não cancelados.
 
-2.  Based on EDA, what variable in the diamonds dataset appears to be most important for predicting the price of a diamond?
-    How is that variable correlated with cut?
-    Why does the combination of those two relationships lead to lower quality diamonds being more expensive?
+2.  Com base na EDA, qual variável do banco de dados diamante parece ser mais importante para predizer o preço de um diamante?
+    Como essa variável está correlacionada com corte?
+    Por que a combinação dessas duas relações leva a qualidade mais baixa de diamantes ser mais caros?
 
-3.  Instead of exchanging the x and y variables, add `coord_flip()` as a new layer to the vertical boxplot to create a horizontal one.
-    How does this compare to exchanging the variables?
+3.  Ao invés de trocar as variáveis x e y, adicione `coord_flip()` como uma nova camada para transformar o boxplot de vertical para horizontal.
+    Como isso se compara à troca de variáveis?
 
-4.  One problem with boxplots is that they were developed in an era of much smaller datasets and tend to display a prohibitively large number of "outlying values".
-    One approach to remedy this problem is the letter value plot.
-    Install the lvplot package, and try using `geom_lv()` to display the distribution of price vs. cut.
-    What do you learn?
-    How do you interpret the plots?
+4.  Um problema com os boxplots é que eles foram desenvolvidos em uma era de conjuntos de dados muito menores e tendem a exibir um número proibitivamente grande de "valores periféricos".
+    Uma abordagem para remediar esse problema é o gráfico de valores de letras.
+    Instale o pacote the lvplot, e tente usar `geom_lv()` para exibir a distribuição de preço vs. corte.
+    O que você entende?
+    Como você interpreta os gráficos?
 
-5.  Create a visualization of diamond prices vs. a categorical variable from the `diamonds` dataset using `geom_violin()`, then a faceted `geom_histogram()`, then a colored `geom_freqpoly()`, and then a colored `geom_density()`.
-    Compare and contrast the four plots.
-    What are the pros and cons of each method of visualizing the distribution of a numerical variable based on the levels of a categorical variable?
+5.  Crie uma visualização dos preços dos diamantes vs. uma variável categórica do banco de dados diamante usando o `geom_violin()`, depois um facetado `geom_histogram()`, e depois um colorido `geom_freqpoly()`, e depois um colorido `geom_density()`.
+    Compare e contraste os quatro gráficos.
+    Quais são os prós e contras de cada método de visualização da distribuição de uma variável numérica baseada nos níveis de uma variável categórica?
 
-6.  If you have a small dataset, it's sometimes useful to use `geom_jitter()` to avoid overplotting to more easily see the relationship between a continuous and categorical variable.
-    The ggbeeswarm package provides a number of methods similar to `geom_jitter()`.
-    List them and briefly describe what each one does.
+6.  Se você tem um pequeno conjunto de dados, às vezes é útil usar `geom_jitter()` para evitar plotagem excessiva e ver mais facilmente a relação entre as variáveis contínuas e categóricas.
+    O pacote ggbeeswarm disponibiliza um número de métodos similares ao `geom_jitter()`.
+    Liste eles e descreva brevemente o que cada um deles faz.
 
 ### Two categorical variables
 
