@@ -469,10 +469,10 @@ ggplot(milhas, aes(x = rodovia, y = fct_reorder(classe, rodovia, median))) +
     O pacote ggbeeswarm disponibiliza um número de métodos similares ao `geom_jitter()`.
     Liste eles e descreva brevemente o que cada um deles faz.
 
-### Two categorical variables
+### Duas variáveis categóricas
 
-To visualize the covariation between categorical variables, you'll need to count the number of observations for each combination of levels of these categorical variables.
-One way to do that is to rely on the built-in `geom_count()`:
+Para visualizar a covariação entre variáveis categóricas, você irá necessitar contar o número de observações para cada combinação dos níveis dessas variáveis categóricas.
+Uma maneira de fazer isso é contar com o `geom_count()` integrado:
 
 ```{r}
 #| fig-alt: |
@@ -482,21 +482,21 @@ One way to do that is to rely on the built-in `geom_count()`:
 #|   the number of observations for that combination. The legend indicates 
 #|   that these sizes range between 1000 and 4000.
 
-ggplot(diamonds, aes(x = cut, y = color)) +
+ggplot(diamante, aes(x = corte, y = cor)) +
   geom_count()
 ```
 
-The size of each circle in the plot displays how many observations occurred at each combination of values.
-Covariation will appear as a strong correlation between specific x values and specific y values.
+O tamanho de cada círculo no gráfico exibe quantas observações ocorrem em cada combinação de valores.
+A covariação aparecerá como uma forte correlação entre valores específicos de x e valores específicos de y.
 
-Another approach for exploring the relationship between these variables is computing the counts with dplyr:
+Outra abordagem para explorar a relação entre essas variáveis é calcular as contagens com dplyr:
 
 ```{r}
-diamonds |> 
-  count(color, cut)
+diamante |> 
+  count(cor, corte)
 ```
 
-Then visualize with `geom_tile()` and the fill aesthetic:
+Em seguida, visualize com `geom_tile()` e a estética (aesthetic) de preechimento:
 
 ```{r}
 #| fig-alt: |
@@ -506,25 +506,25 @@ Then visualize with `geom_tile()` and the fill aesthetic:
 #|   with the highest number being Ideal diamonds with color G. Fair diamonds 
 #|   and diamonds with color I are the lowest in frequency.
 
-diamonds |> 
-  count(color, cut) |>  
-  ggplot(aes(x = color, y = cut)) +
+diamante |> 
+  count(cor, corte) |>  
+  ggplot(aes(x = cor, y = corte)) +
   geom_tile(aes(fill = n))
 ```
 
-If the categorical variables are unordered, you might want to use the seriation package to simultaneously reorder the rows and columns in order to more clearly reveal interesting patterns.
-For larger plots, you might want to try the heatmaply package, which creates interactive plots.
+Se as variáveis categóricas não estão ordenadas, você pode querer usar o pacote de seriação para reordenar simultaneamente as linhas e colunas para revelar padrões interessantes com mais clareza.
+Para gráficos maiores, você pode querer usar o pacote heatmaply, que cria gráficos interativos.
 
-#### Exercises
+#### Exercícios
 
-1.  How could you rescale the count dataset above to more clearly show the distribution of cut within color, or color within cut?
+1.  Como você poderia redimensionar o conjunto de dados de contagem acima para mostrar mais claramente a distribuição do corte dentro da cor ou da cor dentro do corte?
 
-2.  What different data insights do you get with a segmented bar chart if color is mapped to the `x` aesthetic and `cut` is mapped to the `fill` aesthetic?
-    Calculate the counts that fall into each of the segments.
+2.  Que diferentes insights de dados você obtém com um gráfico de barras segmentado se a cor for mapeada para a estética x e o corte for mapeado para a estética de preenchimento?
+    Calcule as contagens que se enquadram em cada um dos segmentos.
 
-3.  Use `geom_tile()` together with dplyr to explore how average flight departure delays vary by destination and month of year.
-    What makes the plot difficult to read?
-    How could you improve it?
+3.  Use `geom_tile()` junto com dplyr para explorar como os atrasos médios nas partidas de voos variam de acordo com o destino e o mês do ano.
+    O que torna o enredo difícil de ler?
+    Como você poderia melhorá-lo?
 
 ### Two numerical variables
 
