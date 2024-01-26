@@ -649,7 +649,7 @@ Uma maneira de mostrar isso é tornar a largura do boxplot proporcional ao núme
       geom_boxplot(aes(group = cut_number(quilate, 20)))
     ```
 
-## Patterns and models
+## Padrões e modelos
 
 If a systematic relationship exists between two variables it will appear as a pattern in the data.
 If you spot a pattern, ask yourself:
