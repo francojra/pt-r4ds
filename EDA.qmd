@@ -526,12 +526,12 @@ Para gráficos maiores, você pode querer usar o pacote heatmaply, que cria grá
     O que torna o enredo difícil de ler?
     Como você poderia melhorá-lo?
 
-### Two numerical variables
+### Duas variáveis numéricas
 
-You've already seen one great way to visualize the covariation between two numerical variables: draw a scatterplot with `geom_point()`.
-You can see covariation as a pattern in the points.
-For example, you can see a positive relationship between the carat size and price of a diamond: diamonds with more carats have a higher price.
-The relationship is exponential.
+Você já viu uma ótima maneira de visualizar a covariação entre duas variáveis numéricas: desenhar um gráfico de dispersão com `geom_point()`.
+Você pode ver a covariação com um padrão dos pontos.
+Por exemplo, você pode ver uma relação positiva entre quilate e preço do diamante: diamantes com mais quilates tem preços mais altos.
+A relação é exponencial.
 
 ```{r}
 #| dev: "png"
@@ -539,14 +539,17 @@ The relationship is exponential.
 #|   A scatterplot of price vs. carat. The relationship is positive, somewhat 
 #|   strong, and exponential.
 
-ggplot(smaller, aes(x = carat, y = price)) +
+menores_diamantes <- diamante |> 
+  filter(quilate < 3)
+
+ggplot(menores_diamantes, aes(x = quilate, y = preco)) +
   geom_point()
 ```
 
-(In this section we'll use the `smaller` dataset to stay focused on the bulk of the diamonds that are smaller than 3 carats)
+(Nesta seção usaremos o conjunto de dados `menores_diamantes` para manter o foco na maior parte dos diamantes menores que 3 quilates)
 
-Scatterplots become less useful as the size of your dataset grows, because points begin to overplot, and pile up into areas of uniform black, making it hard to judge differences in the density of the data across the 2-dimensional space as well as making it hard to spot the trend.
-You've already seen one way to fix the problem: using the `alpha` aesthetic to add transparency.
+Gráficos de dispersão se tornam menos usuais à medida que seu conjunto de dados cresce, porque os pontos se acumulam, e se amontoam em áreas de preto uniforme, tornando difícil julgar diferenças na densidade dos dados em torno do espaço bidimensional, bem como difícil de ver alguma tendência.
+Você já tem visto uma forma de corrigir esse problema: usando a estética (aesthetic) `alpha` para adicionar transparência.
 
 ```{r}
 #| dev: "png"
@@ -556,19 +559,18 @@ You've already seen one way to fix the problem: using the `alpha` aesthetic to a
 #|   the number of points is higher than other areas, The most obvious clusters 
 #|   are for diamonds with 1, 1.5, and 2 carats.
 
-ggplot(smaller, aes(x = carat, y = price)) + 
+ggplot(menores_diamantes, aes(x = quilate, y = preco)) + 
   geom_point(alpha = 1 / 100)
 ```
 
-But using transparency can be challenging for very large datasets.
-Another solution is to use bin.
-Previously you used `geom_histogram()` and `geom_freqpoly()` to bin in one dimension.
-Now you'll learn how to use `geom_bin2d()` and `geom_hex()` to bin in two dimensions.
+Mas usar transparência pode ser desafiador para conjunto de dados grandes.
+Outra solução é usar intervalos (bins).
+Previamente, você usou `geom_histogram()` e `geom_freqpoly()` para bin em uma dimensão.
+Agora você irá aprender como usar `geom_bin2d()` e `geom_hex()` para bins em duas dimensões.
 
-`geom_bin2d()` and `geom_hex()` divide the coordinate plane into 2d bins and then use a fill color to display how many points fall into each bin.
-`geom_bin2d()` creates rectangular bins.
-`geom_hex()` creates hexagonal bins.
-You will need to install the hexbin package to use `geom_hex()`.
+`geom_bin2d()` e `geom_hex()` divide o plano de coordenadas em bins 2D e então usa um preenchimento de cor para exibir quantos pontos caem em cada bin.
+`geom_bin2d()` cria bins retangulares e `geom_hex()` cria bins hexagonais.
+Você irá necessitar instalar o pacote hexbin para usar `geom_hex()`.
 
 ```{r}
 #| layout-ncol: 2
@@ -578,17 +580,17 @@ You will need to install the hexbin package to use `geom_hex()`.
 #|   plot of price vs. carat. Both plots show that the highest density of 
 #|   diamonds have low carats and low prices.
 
-ggplot(smaller, aes(x = carat, y = price)) +
+ggplot(menores_diamantes, aes(x = quilate, y = preco)) +
   geom_bin2d()
 
 # install.packages("hexbin")
-ggplot(smaller, aes(x = carat, y = price)) +
+ggplot(menores_diamantes, aes(x = quilate, y = preco)) +
   geom_hex()
 ```
 
-Another option is to bin one continuous variable so it acts like a categorical variable.
-Then you can use one of the techniques for visualizing the combination of a categorical and a continuous variable that you learned about.
-For example, you could bin `carat` and then for each group, display a boxplot:
+Outra opção é agrupar uma variável contínua para que ela atue como uma variável categórica.
+Então você usa uma das técnicas para visualizar a combinação de uma variável categórica e uma contínua que você aprendeu antes.
+Por exemplo, você poderia categorizar a variável `quilate`, e então para cada grupo exibir um boxplot:
 
 ```{r}
 #| fig-alt: |
@@ -600,47 +602,51 @@ For example, you could bin `carat` and then for each group, display a boxplot:
 #|   left skewed distributions. Cheaper, smaller diamonds have outliers on the 
 #|   higher end, more expensive, bigger diamonds have outliers on the lower end.
 
-ggplot(smaller, aes(x = carat, y = price)) + 
-  geom_boxplot(aes(group = cut_width(carat, 0.1)))
+ggplot(menores_diamantes, aes(x = quilate, y = preco)) + 
+  geom_boxplot(aes(group = cut_width(quilate, 0.1)))
 ```
 
 `cut_width(x, width)`, as used above, divides `x` into bins of width `width`.
 By default, boxplots look roughly the same (apart from number of outliers) regardless of how many observations there are, so it's difficult to tell that each boxplot summaries a different number of points.
 One way to show that is to make the width of the boxplot proportional to the number of points with `varwidth = TRUE`.
 
-#### Exercises
+`cut_width(x, width)`, conforme usado acima, divide `x` em compartimentos de largura (`width`).
+Por padrão, os boxplots parecem praticamente os mesmos (exceto pelo número de valores discrepantes) independentemente de quantas observações existem, então é difícil dizer que cada boxplot resume um diferente número de pontos.
+Uma maneira de mostrar isso é tornar a largura do boxplot proporcional ao número de pontos com `varwidth = TRUE`.
 
-1.  Instead of summarizing the conditional distribution with a boxplot, you could use a frequency polygon.
-    What do you need to consider when using `cut_width()` vs. `cut_number()`?
-    How does that impact a visualization of the 2d distribution of `carat` and `price`?
+#### Exercícios
 
-2.  Visualize the distribution of `carat`, partitioned by `price`.
+1.  Em vez de resumir a distribuição condicional com um boxplot, você poderia usar um polígono de frequência.
+    O que você precisa considerar ao usar `cut_width()` vs. `cut_number()`?
+    Como isso afeta a visualização da distribuição 2D de `quilate` e `preco`?
 
-3.  How does the price distribution of very large diamonds compare to small diamonds?
-    Is it as you expect, or does it surprise you?
+2.  Visualize a distribuição do `quilate`, particionado por `preco`.
 
-4.  Combine two of the techniques you've learned to visualize the combined distribution of cut, carat, and price.
+3.  Como a distribuição de preços dos diamantes muito grandes se compara à dos diamantes pequenos?
+    É como você espera ou te surpreende?
 
-5.  Two dimensional plots reveal outliers that are not visible in one dimensional plots.
-    For example, some points in the following plot have an unusual combination of `x` and `y` values, which makes the points outliers even though their `x` and `y` values appear normal when examined separately.
-    Why is a scatterplot a better display than a binned plot for this case?
+4.  Combine duas das técnicas que você aprendeu para visualizar a distribuição combinada de corte, quilate e preço.
+
+5.  Gráficos bidimensionais revelam valores discrepantes que não são visíveis em gráficos unidimensionais.
+    Por exemplo, alguns pontos no gráfico a seguir têm uma combinação incomum de valores `x` e `y`, o que torna os pontos discrepantes, embora seus valores `x` e `y` pareçam normais quando examinados separadamente.
+    Por que um gráfico de dispersão é uma exibição melhor do que um gráfico agrupado neste caso?
 
     ```{r}
     #| eval: false
-    diamonds |> 
+    diamante |> 
       filter(x >= 4) |> 
       ggplot(aes(x = x, y = y)) +
       geom_point() +
       coord_cartesian(xlim = c(4, 11), ylim = c(4, 11))
     ```
 
-6.  Instead of creating boxes of equal width with `cut_width()`, we could create boxes that contain roughly equal number of points with `cut_number()`.
-    What are the advantages and disadvantages of this approach?
+6.  Em vez de criar caixas de largura igual com `cut_width()`, poderíamos criar caixas que contenham um número aproximadamente igual de pontos com `cut_number()`.
+    Quais são as vantagens e desvantagens desta abordagem?
 
     ```{r}
     #| eval: false
-    ggplot(smaller, aes(x = carat, y = price)) + 
-      geom_boxplot(aes(group = cut_number(carat, 20)))
+    ggplot(menores_diamantes, aes(x = quilate, y = preco)) + 
+      geom_boxplot(aes(group = cut_number(quilate, 20)))
     ```
 
 ## Patterns and models
