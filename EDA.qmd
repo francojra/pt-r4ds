@@ -651,32 +651,32 @@ Uma maneira de mostrar isso é tornar a largura do boxplot proporcional ao núme
 
 ## Padrões e modelos
 
-If a systematic relationship exists between two variables it will appear as a pattern in the data.
-If you spot a pattern, ask yourself:
+Se existe uma relação sistemática entre duas variáveis ela irá aparecer como um padrão nos dados.
+Se você detectar um padrão, se questione:
 
--   Could this pattern be due to coincidence (i.e. random chance)?
+-   Poderia esse padrão ser uma coincidência (ou seja, ao acaso)?
 
--   How can you describe the relationship implied by the pattern?
+-   Como você pode descrever a relação implícita no padrão?
 
--   How strong is the relationship implied by the pattern?
+-   Quão forte é a relação implícita no padrão?
 
--   What other variables might affect the relationship?
+-   Quais outras variáveis podem afetar a relação?
 
--   Does the relationship change if you look at individual subgroups of the data?
+-   A relação muda se você observar subgrupos individuais dos dados?
 
-Patterns in your data provide clues about relationships, i.e., they reveal covariation.
-If you think of variation as a phenomenon that creates uncertainty, covariation is a phenomenon that reduces it.
-If two variables covary, you can use the values of one variable to make better predictions about the values of the second.
-If the covariation is due to a causal relationship (a special case), then you can use the value of one variable to control the value of the second.
+Os padrões nos seus dados revelam pistas sobre as relações, por exemplo, eles revelam covariação.
+Se pensarmos na variação como um fenômeno que cria incerteza, covariação é um fenômeno que reduz ela.
+Se duas variáveis covariam, você pode usar os valores de uma variável para fazer melhores previsões sobre os valores da segunda.
+Se a covariação é uma relação causal (um caso especial), então você pode usar o valor de uma variável para controlar o valor da segunda.
 
-Models are a tool for extracting patterns out of data.
-For example, consider the diamonds data.
-It's hard to understand the relationship between cut and price, because cut and carat, and carat and price are tightly related.
-It's possible to use a model to remove the very strong relationship between price and carat so we can explore the subtleties that remain.
-The following code fits a model that predicts `price` from `carat` and then computes the residuals (the difference between the predicted value and the actual value).
-The residuals give us a view of the price of the diamond, once the effect of carat has been removed.
-Note that instead of using the raw values of `price` and `carat`, we log transform them first, and fit a model to the log-transformed values.
-Then, we exponentiate the residuals to put them back in the scale of raw prices.
+Os modelos são ferramentas para extrair padrões dos dados.
+Por exemplo, considere os dados diamantes.
+É difícil entender a relação entre corte e preço, porque corte e quilate, e quilate e preço são intimamente relacionados.
+É possível usar o modelo para remover a forte relação entre preço e quilate, então nós podemos explorar as complexidades que permanecem.
+O seguinte código ajusta o modelo que prediz `preco` de `quilate` e então calcula os resíduos (a diferença entre o valor predito e o valor real).
+Os resíduos nos dão uma visão do preço do diamante, uma vez que o efeito do quilate tem sido removido.
+Note que ao invés de usar os valores das linhas de `preco` e `quilate`, nós transformamos em log primeiro, e ajustamos o modelo aos valores transformados em log.
+Depois, exponenciamos os resíduos para colocá-los de volta na escala de preços brutos.
 
 ```{r}
 #| message: false
@@ -689,23 +689,23 @@ Then, we exponentiate the residuals to put them back in the scale of raw prices.
 
 library(tidymodels)
 
-diamonds <- diamonds |>
+diamante <- diamante |>
   mutate(
-    log_price = log(price),
-    log_carat = log(carat)
+    log_preco = log(preco),
+    log_quilate = log(quilate)
   )
 
-diamonds_fit <- linear_reg() |>
-  fit(log_price ~ log_carat, data = diamonds)
+diamante_fit <- linear_reg() |>
+  fit(log_preco ~ log_quilate, data = diamante)
 
-diamonds_aug <- augment(diamonds_fit, new_data = diamonds) |>
+diamante_aug <- augment(diamante_fit, new_data = diamante) |>
   mutate(.resid = exp(.resid))
 
-ggplot(diamonds_aug, aes(x = carat, y = .resid)) + 
+ggplot(diamante_aug, aes(x = quilate, y = .resid)) + 
   geom_point()
 ```
 
-Once you've removed the strong relationship between carat and price, you can see what you expect in the relationship between cut and price: relative to their size, better quality diamonds are more expensive.
+Uma vez que você tem removido a forte relação entre quilate e preço, você pode ver o esperado da relação entre corte e preço: relativo ao tamanho deles, diamantes de melhor qualidade (corte) são mais caros.
 
 ```{r}
 #| fig-alt: |
@@ -714,7 +714,7 @@ Once you've removed the strong relationship between carat and price, you can see
 #|   quite similar, between roughly 0.75 to 1.25. Each of the distributions of 
 #|   residuals is right skewed, with many outliers on the higher end.
 
-ggplot(diamonds_aug, aes(x = cut, y = .resid)) + 
+ggplot(diamante_aug, aes(x = corte, y = .resid)) + 
   geom_boxplot()
 ```
 
