@@ -720,10 +720,10 @@ ggplot(diamante_aug, aes(x = corte, y = .resid)) +
 
 Nós não discutimos modelagem nesse livro porque entender o que são os modelos e como eles trabalham é mais fácil uma vez que você tem ferramentas de organização de dados (data wrangling) e programação em mãos.
 
-## Summary
+## Resumo
 
-In this chapter you've learned a variety of tools to help you understand the variation within your data.
-You've seen techniques that work with a single variable at a time and with a pair of variables.
-This might seem painfully restrictive if you have tens or hundreds of variables in your data, but they're the foundation upon which all other techniques are built.
+Nesse capítulo você tem aprendido uma variedade de ferramentas para ajudar você a entender a variação dentro dos dados.
+Você tem visto técnicas que trabalham com uma única variável no tempo e com um par de variáveis.
+Isso pode parecer dolorosamente restritivo se você tem dezenas ou centenas de variáveis nos seus dados, mas elas são a base sobre a qual todas as outras técnicas são construídas.
 
-In the next chapter, we'll focus on the tools we can use to communicate our results.
+No próximo capítulo, nós focaremos sobre ferramentas que podemos usar para comunicar nossos resultados.
