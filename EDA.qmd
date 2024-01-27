@@ -718,7 +718,7 @@ ggplot(diamante_aug, aes(x = corte, y = .resid)) +
   geom_boxplot()
 ```
 
-We're not discussing modelling in this book because understanding what models are and how they work is easiest once you have tools of data wrangling and programming in hand.
+Nós não discutimos modelagem nesse livro porque entender o que são os modelos e como eles trabalham é mais fácil uma vez que você tem ferramentas de organização de dados (data wrangling) e programação em mãos.
 
 ## Summary
 
