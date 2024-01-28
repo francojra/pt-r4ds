@@ -2,10 +2,8 @@
 
 ```{r}
 #| echo: false
-#| results: asis
 
 source("_common.R")
-mensagem_capitulo_sem_traducao()
 ```
 
 ## Introdução
@@ -260,9 +258,7 @@ Se você encontrou valores atípicos no seu conjunto de dados e simplesmente des
     Não recomendamos esta opção porque um valor inválido não implica que todos os outros valores para essa observação também sejam inválidos.
     Além disso, se você tiver dados de baixa qualidade, ao aplicar essa abordagem a todas as variáveis, você poderá descobrir que não tem mais dados!
 
-2.  Ao invés, nós recomendamos substituir os valores atípicos por valores faltantes (missing values).
-    O caminho mais fácil para fazer isso, é usar a função mutate() para substituir os valores atípicos da variável.
-    Você também pode usar o if_else() para substituir os valores atípicos por NA:
+2.  Ao invés, nós recomendamos substituir os valores atípicos por valores faltantes (missing values).O caminho mais fácil para fazer isso, é usar a função mutate() para substituir os valores atípicos da variável.Você também pode usar o if_else() para substituir os valores atípicos por NA:
 
     ```{r}
     diamante2 <- diamante |> 
@@ -291,13 +287,6 @@ Para suprimir esse aviso, defina `na.rm = TRUE`:
 ggplot(diamante2, aes(x = x, y = y)) + 
   geom_point(na.rm = TRUE)
 ```
-
-Other times you want to understand what makes observations with missing values different to observations with recorded values.
-For example, in `nycflights13::flights`[^eda-1], missing values in the `dep_time` variable indicate that the flight was cancelled.
-So you might want to compare the scheduled departure times for cancelled and non-cancelled times.
-You can do this by making a new variable, using `is.na()` to check if `dep_time` is missing.
-
-[^eda-1]: Remember that when we need to be explicit about where a function (or dataset) comes from, we'll use the special form `package::function()` or `package::dataset`.
 
 Outras vezes, você deseja entender o que torna as observações com valores ausentes diferentes das observações com valores registrados.
 Por exemplo, em `nycflights13::flights1`, valores ausentes na variável dep_time indicam que o voo foi cancelado.
@@ -339,8 +328,8 @@ Na próxima seção exploraremos algumas técnicas para melhorar essa comparaç�
 
 ## Covariação
 
-Se variação descreve o comportamento dentro de uma variável, covariação descreve o comportamento entre variáveis.
-Covariação é a tendência em que os valores de duas ou mais variáveis variam juntas de maneira relacionada.
+Se variação descreve o comportamento *dentro* de uma variável, covariação descreve o comportamento *entre* variáveis.
+**Covariação** é a tendência em que os valores de duas ou mais variáveis variam juntas de maneira relacionada.
 O melhor caminho para ver a covariação é visualizar a relação entre duas ou mais variáveis.
 
 ### Uma variável categórica e uma numérica {#sec-cat-num}
@@ -360,7 +349,7 @@ ggplot(diamante, aes(x = preco)) +
   geom_freqpoly(aes(color = corte), binwidth = 500, linewidth = 0.75)
 ```
 
-Note que o ggplot2 usa uma escala de cor ordenada para corte porque ele está definido como um fator ordenado nos dados.
+Note que o ggplot2 usa uma escala de cor ordenada para `corte` porque ele está definido como um fator ordenado nos dados.
 Você irá aprender mais sobre isso em @sec-ordered-factors.
 
 A aparência padrão de `geom_freqpoly()` não é tão útil aqui porque a altura, determinada pela contagem geral, difere muito entre os `corte`s, tornando difícil ver as diferenças nas formas de suas distribuições.
