@@ -81,12 +81,12 @@ Como `quilate` é uma variável numérica, podemos usar um histograma:
 
 ```{r}
 #| fig-alt: |
-#|   A histogram of carats of diamonds, with the x-axis ranging from 0 to 4.5 
-#|   and the y-axis ranging from 0 to 30000. The distribution is right skewed 
-#|   with very few diamonds in the bin centered at 0, almost 30000 diamonds in 
-#|   the bin centered at 0.5, approximately 15000 diamonds in the bin centered 
-#|   at 1, and much fewer, approximately 5000 diamonds in the bin centered at 
-#|   1.5. Beyond this, there's a trailing tail.
+#| Um histograma de quilates de diamantes, com o eixo x variando de 0 a 4,5
+#| e o eixo y variando de 0 a 30.000. A distribuição é distorcida para a direita
+#| com muito poucos diamantes na caixa centralizada em 0, quase 30.000 diamantes na
+#| caixa centralizada em 0,5, aproximadamente 15.000 diamantes na caixa centralizada
+#| em 1, e muito menos, aproximadamente 5.000 diamantes na caixa centralizada em
+#| 1.5. Além disso, há uma cauda arrastada.
 
 library(dados)
 
@@ -119,11 +119,11 @@ Vamos observar a distribuição de `quilate` para os diamantes menores.
 
 ```{r}
 #| fig-alt: |
-#|   A histogram of carats of diamonds, with the x-axis ranging from 0 to 3 and 
-#|   the y-axis ranging from 0 to roughly 2500. The binwidth is quite narrow 
-#|   (0.01), resulting in a very large number of skinny bars. The distribution 
-#|   is right skewed, with many peaks followed by bars in decreasing heights, 
-#|   until a sharp increase at the next peak.
+#| Um histograma de quilates de diamantes, com o eixo x variando de 0 a 3 e
+#| o eixo y variando de 0 a aproximadamente 2.500. A largura do compartimento é 
+#| bastante estreita (0,01), resultando em um número muito grande de barras finas. 
+#| A distribuição é inclinada para a direita, com muitos picos seguidos por barras em
+#| alturas decrescentes, até um aumento acentuado no próximo pico.
 
 menores_diamantes <- diamante |> 
   filter(quilate < 3)
@@ -164,9 +164,9 @@ A única evidência de valores discrepantes são os limites incomumente amplos n
 
 ```{r}
 #| fig-alt: |
-#|   A histogram of lengths of diamonds. The x-axis ranges from 0 to 60 and 
-#|   the y-axis ranges from 0 to 12000. There is a peak around 5, and the 
-#|   data appear to be completely clustered around the peak.
+#| Um histograma de comprimentos de diamantes. O eixo x varia de 0 a 60 e
+#| o eixo y varia de 0 a 12.000. Há um pico em torno de 5, e o
+#| os dados parecem estar completamente agrupados em torno do pico.
 
 ggplot(diamante, aes(x = y)) + 
   geom_histogram(binwidth = 0.5)
@@ -177,11 +177,11 @@ Para facilitar a visualização dos valores incomuns, precisamos ampliar para os
 
 ```{r}
 #| fig-alt: |
-#|   A histogram of lengths of diamonds. The x-axis ranges from 0 to 60 and the 
-#|   y-axis ranges from 0 to 50. There is a peak around 5, and the data 
-#|   appear to be completely clustered around the peak. Other than those data, 
-#|   there is one bin at 0 with a height of about 8, one a little over 30 with 
-#|   a height of 1 and another one a little below 60 with a height of 1.
+#| Um histograma de comprimentos de diamantes. O eixo x varia de 0 a 60 e o
+#| o eixo y varia de 0 a 50. Há um pico em torno de 5 e os dados
+#| parecem estar completamente agrupados em torno do pico. Além desses dados,
+#| há uma caixa em 0 com uma altura de cerca de 8, uma com pouco mais de 30 com
+#| altura 1 e outra um pouco abaixo de 60 com altura 1.
 
 ggplot(diamante, aes(x = y)) + 
   geom_histogram(binwidth = 0.5) +
@@ -270,10 +270,10 @@ Não é óbvio onde você deve traçar os valores ausentes, então o ggplot2 nã
 ```{r}
 #| dev: "png"
 #| fig-alt: |
-#|   A scatterplot of widths vs. lengths of diamonds. There is a strong, 
-#|   linear association between the two variables. All but one of the diamonds 
-#|   has length greater than 3. The one outlier has a length of 0 and a width 
-#|   of about 6.5. 
+#| Um gráfico de dispersão de larguras versus comprimentos de diamantes. Há um forte,
+#| associação linear entre as duas variáveis. Todos menos um dos diamantes
+#| tem comprimento maior que 3. O valor discrepante tem comprimento 0 e largura
+#| de cerca de 6,5.
 
 ggplot(diamante2, aes(x = x, y = y)) + 
   geom_point()
@@ -295,10 +295,10 @@ Você pode fazer isso criando uma nova variável, usando `is.na()` para verifica
 
 ```{r}
 #| fig-alt: |
-#|   A frequency polygon of scheduled departure times of flights. Two lines 
-#|   represent flights that are cancelled and not cancelled. The x-axis ranges 
-#|   from 0 to 25 minutes and the y-axis ranges from 0 to 10000. The number of 
-#|   flights not cancelled are much higher than those cancelled.
+#| Um polígono de frequência de horários programados de partida de voos. Duas linhas
+#| representam voos cancelados e não cancelados. Os intervalos do eixo x
+#| de 0 a 25 minutos e o eixo y varia de 0 a 10.000.
+#| os voos não cancelados são muito superiores aos cancelados.
 
 dados::voos |> 
   mutate(
@@ -338,12 +338,12 @@ Por exemplo, vamos explorar como o preço do diamante varia com a qualidade dele
 
 ```{r}
 #| fig-alt: |
-#|   A frequency polygon of prices of diamonds where each cut of carat (Fair, 
-#|   Good, Very Good, Premium, and Ideal) is represented with a different color 
-#|   line. The x-axis ranges from 0 to 30000 and the y-axis ranges from 0 to 
-#|   5000. The lines overlap a great deal, suggesting similar frequency 
-#|   distributions of prices of diamonds. One notable feature is that 
-#|   Ideal diamonds have the highest peak around 1500.
+#| Um polígono de frequência de preços de diamantes onde cada corte de quilate (Justo,
+#| Bom, Muito Bom, Premium e Ideal) é representado com uma cor diferente
+#| linha. O eixo x varia de 0 a 20.000 e o eixo y varia de 0 a
+#| 5000. As linhas se sobrepõem bastante, sugerindo frequência semelhante nas
+#| distribuições dos preços dos diamantes. Uma característica notável é que
+#| Os diamantes ideais têm o pico mais alto por volta de 1500.
 
 ggplot(diamante, aes(x = preco)) + 
   geom_freqpoly(aes(color = corte), binwidth = 500, linewidth = 0.75)
@@ -359,12 +359,13 @@ Ao invés da contagem (frequência), nós iremos exibir a **densidade** (**densi
 
 ```{r}
 #| fig-alt: |
-#|   A frequency polygon of densities of prices of diamonds where each cut of 
-#|   carat (Fair, Good, Very Good, Premium, and Ideal) is represented with a 
-#|   different color line. The x-axis ranges from 0 to 20000. The lines overlap 
-#|   a great deal, suggesting similar density distributions of prices of 
-#|   diamonds. One notable feature is that all but Fair diamonds have high peaks 
-#|   around a price of 1500 and Fair diamonds have a higher mean than others.
+#| Um polígono de frequência de densidades de preços de diamantes onde cada corte de
+#| quilate (razoável, bom, muito bom, premium e ideal) é representado por um
+#| linha de cor diferente. O eixo x varia de 0 a 20.000. As linhas se sobrepõem
+#| bastante, sugerindo distribuições de densidade semelhantes de preços de
+#| diamantes. Uma característica notável é que todos os diamantes, exceto os Justos,têm
+#| picos altos em torno de um preço de 1.500 e os diamantes justos têm uma média mais
+#| elevada do que outros.
 
 ggplot(diamante, aes(x = preco, y = after_stat(density))) + 
   geom_freqpoly(aes(color = corte), binwidth = 500, linewidth = 0.75)
@@ -379,10 +380,10 @@ Um gráfico visualmente mais simples para explorar essa relação são os boxplo
 
 ```{r}
 #| fig-alt: |
-#|   Side-by-side boxplots of prices of diamonds by cut. The distribution of 
-#|   prices is right skewed for each cut (Fair, Good, Very Good, Premium, and 
-#|   Ideal). The medians are close to each other, with the median for Ideal 
-#|   diamonds lowest and that for Fair highest.
+#| Boxplots lado a lado dos preços dos diamantes por corte. A distribuição de
+#| preços é enviesado à direita para cada corte (razoável, bom, muito bom, premium e
+#| Ideal). As medianas estão próximas umas das outras, sendo a mediana do Ideal
+#| os diamantes são os mais baixos e os de Fair os mais altos.
 
 ggplot(diamante, aes(x = corte, y = preco)) +
   geom_boxplot()
@@ -401,9 +402,9 @@ Você pode estar interessado em saber como a quilometragem da rodovia varia entr
 
 ```{r}
 #| fig-alt: |
-#|   Side-by-side boxplots of highway mileages of cars by class. Classes are 
-#|   on the x-axis (2seaters, compact, midsize, minivan, pickup, subcompact, 
-#|   and suv).
+#| Boxplots lado a lado de quilometragem rodoviária de carros por classe. As classes
+#| no eixo x (2 lugares, compacto, médio, minivan, picape, subcompacto,
+#| e SUV).
 
 ggplot(milhas, aes(x = classe, y = rodovia)) +
   geom_boxplot()
@@ -413,9 +414,9 @@ Para tornar a tendência mais fácil de visualizar, nós podemos reordenar `clas
 
 ```{r}
 #| fig-alt: |
-#|   Side-by-side boxplots of highway mileages of cars by class. Classes are 
-#|   on the x-axis and ordered by increasing median highway mileage (pickup, 
-#|   suv, minivan, 2seater, subcompact, compact, and midsize).
+#| Boxplots lado a lado de quilometragem rodoviária de carros por classe. As classes
+#| no eixo x estão ordenadas pelo aumento da quilometragem média da rodovia (recolha,
+#| suv, minivan, 2 lugares, subcompacto, compacto e médio).
 
 ggplot(milhas, aes(x = fct_reorder(classe, rodovia, median), y = rodovia)) +
   geom_boxplot()
@@ -426,8 +427,8 @@ Você pode fazer isso trocando os eixos x e y.
 
 ```{r}
 #| fig-alt: |
-#|   Side-by-side boxplots of highway mileages of cars by class. Classes are 
-#|   on the y-axis and ordered by increasing median highway mileage.
+#| Boxplots lado a lado de quilometragem rodoviária de carros por classe. As classes
+#| estão ordenadas no eixo y pelo aumento da quilometragem média.
 
 ggplot(milhas, aes(x = rodovia, y = fct_reorder(classe, rodovia, median))) +
   geom_boxplot()
@@ -465,11 +466,11 @@ Uma maneira de fazer isso é contar com o `geom_count()` integrado:
 
 ```{r}
 #| fig-alt: |
-#|   A scatterplot of color vs. cut of diamonds. There is one point for each
-#|   combination of levels of cut (Fair, Good, Very Good, Premium, and Ideal) 
-#|   and color (D, E, F, G, G, I, and J). The sizes of the points represent 
-#|   the number of observations for that combination. The legend indicates 
-#|   that these sizes range between 1000 and 4000.
+#| Um gráfico de dispersão de cor versus corte de diamantes. Há um ponto para cada
+#| combinação de níveis de corte (Razoável, Bom, Muito Bom, Premium e Ideal)
+#| e cor (D, E, F, G, G, I e J). Os tamanhos dos pontos representam
+#| o número de observações para essa combinação. A legenda indica
+#| que esses tamanhos variam entre 1000 e 4000.
 
 ggplot(diamante, aes(x = corte, y = cor)) +
   geom_count()
@@ -489,11 +490,11 @@ Em seguida, visualize com `geom_tile()` e a estética (aesthetic) de preechiment
 
 ```{r}
 #| fig-alt: |
-#|   A tile plot of cut vs. color of diamonds. Each tile represents a 
-#|   cut/color combination and tiles are colored according to the number of 
-#|   observations in each tile. There are more Ideal diamonds than other cuts, 
-#|   with the highest number being Ideal diamonds with color G. Fair diamonds 
-#|   and diamonds with color I are the lowest in frequency.
+#| Um gráfico de corte versus cor de diamantes. Cada peça representa um
+#| combinação de corte/cor e os ladrilhos são coloridos de acordo com o número de
+#| observações em cada bloco. Existem mais diamantes ideais do que outros cortes,
+#| com o número mais alto sendo diamantes ideais com cor G. Diamantes justos
+#| e os diamantes com cor I têm a frequência mais baixa.
 
 diamante |> 
   count(cor, corte) |>  
@@ -525,8 +526,8 @@ A relação é exponencial.
 ```{r}
 #| dev: "png"
 #| fig-alt: |
-#|   A scatterplot of price vs. carat. The relationship is positive, somewhat 
-#|   strong, and exponential.
+#| Um gráfico de dispersão de preço versus quilate. A relação é positiva, um tanto
+#| forte e exponencial.
 
 menores_diamantes <- diamante |> 
   filter(quilate < 3)
