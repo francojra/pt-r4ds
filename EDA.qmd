@@ -544,10 +544,10 @@ Você já tem visto uma forma de corrigir esse problema: usando a estética (aes
 ```{r}
 #| dev: "png"
 #| fig-alt: |
-#|   A scatterplot of price vs. carat. The relationship is positive, somewhat 
-#|   strong, and exponential. The points are transparent, showing clusters where 
-#|   the number of points is higher than other areas, The most obvious clusters 
-#|   are for diamonds with 1, 1.5, and 2 carats.
+#| Um gráfico de dispersão de preço versus quilate. A relação é positiva, um tanto
+#| forte e exponencial. Os pontos são transparentes, mostrando agrupamentos onde
+#| o número de pontos é maior do que outras áreas. Os agrupamentos mais óbvios
+#| são para diamantes com 1, 1,5 e 2 quilates.
 
 ggplot(menores_diamantes, aes(x = quilate, y = preco)) + 
   geom_point(alpha = 1 / 100)
@@ -566,9 +566,9 @@ Você irá necessitar instalar o pacote hexbin para usar `geom_hex()`.
 #| layout-ncol: 2
 #| fig-width: 3
 #| fig-alt: |
-#|   Plot 1: A binned density plot of price vs. carat. Plot 2: A hexagonal bin 
-#|   plot of price vs. carat. Both plots show that the highest density of 
-#|   diamonds have low carats and low prices.
+#| Plot 1: Um gráfico de densidade de preço versus quilate. Plot 2: Uma caixa hexagonal
+#| gráfico de preço versus quilate. Ambos os gráficos mostram que a maior densidade de
+#| os diamantes têm quilates e preços baixos.
 
 ggplot(menores_diamantes, aes(x = quilate, y = preco)) +
   geom_bin2d()
@@ -584,13 +584,14 @@ Por exemplo, você poderia categorizar a variável `quilate`, e então para cada
 
 ```{r}
 #| fig-alt: |
-#|   Side-by-side box plots of price by carat. Each box plot represents diamonds 
-#|   that are 0.1 carats apart in weight. The box plots show that as carat 
-#|   increases the median price increases as well. Additionally, diamonds with 
-#|   1.5 carats or lower have right skewed price distributions, 1.5 to 2 have 
-#|   roughly symmetric price distributions, and diamonds that weigh more have 
-#|   left skewed distributions. Cheaper, smaller diamonds have outliers on the 
-#|   higher end, more expensive, bigger diamonds have outliers on the lower end.
+#| Gráficos boxplot lado a lado de preços por quilate. Cada box plot representa
+#| diamantes que têm 0,1 quilates de diferença em peso. Os gráficos de caixa mostram
+#| que à medida que quilate aumenta ocorrem aumentos do preço médio. Além disso,
+#| diamantes com 1,5 quilates ou menos têm distribuições de preços distorcidas para a
+#| direita, 1,5 a 2 têm distribuições de preços aproximadamente simétricas e os
+#| diamantes que pesam mais têm distribuições distorcidas à esquerda. Diamantes menores
+#| e mais baratos têm valores discrepantes na extremidade superior, diamantes maiores,
+#| e mais caros têm valores discrepantes na extremidade inferior.
 
 ggplot(menores_diamantes, aes(x = quilate, y = preco)) + 
   geom_boxplot(aes(group = cut_width(quilate, 0.1)))
@@ -672,10 +673,10 @@ Depois, exponenciamos os resíduos para colocá-los de volta na escala de preço
 #| message: false
 #| dev: "png"
 #| fig-alt: |
-#|   A scatterplot of residuals vs. carat of diamonds. The x-axis ranges from 0 
-#|   to 5, the y-axis ranges from 0 to almost 4. Much of the data are clustered 
-#|   around low values of carat and residuals. There is a clear, curved pattern 
-#|   showing decrease in residuals as carat increases.
+#| Um gráfico de dispersão de resíduos versus quilate de diamantes. O eixo x varia de 0
+#| a 5, o eixo y varia de 0 a quase 4. Muitos dos dados estão agrupados
+#| em torno de valores baixos de quilate e resíduos. Há um padrão claro e curvo
+#| mostrando diminuição nos resíduos à medida que o quilate aumenta.
 
 library(tidymodels)
 
@@ -699,10 +700,11 @@ Uma vez que você tem removido a forte relação entre quilate e preço, você p
 
 ```{r}
 #| fig-alt: |
-#|   Side-by-side box plots of residuals by cut. The x-axis displays the various 
-#|   cuts (Fair to Ideal), the y-axis ranges from 0 to almost 5. The medians are 
-#|   quite similar, between roughly 0.75 to 1.25. Each of the distributions of 
-#|   residuals is right skewed, with many outliers on the higher end.
+#| Gráficos boxplot lado a lado de resíduos por corte. O eixo x exibe os vários
+#| cortes (justo para ideal), o eixo y varia de 0 a quase 5. As medianas são
+#| bastante semelhantes, entre cerca de 0,75 a 1,25. Cada uma das distribuições 
+#| dos resíduos são distorcidos para a direita, com muitos valores discrepantes na
+#| extremidade superior.
 
 ggplot(diamante_aug, aes(x = corte, y = .resid)) + 
   geom_boxplot()
